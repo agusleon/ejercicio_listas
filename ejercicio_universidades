@@ -1,4 +1,4 @@
-bool esta(Lista<string>* ingredientes, Alimento* comida);
+bool esta(Lista<string>* vocaciones, Universidad* universidades);
 
 Lista<Universidad*>* recomendar_universidades(Lista<Universidad*>* universidades, Lista<string>* vocaciones, unsigned ranking_min)
 {
