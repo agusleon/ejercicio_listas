@@ -1,0 +1,46 @@
+bool esta(Lista<string>* platos_deseados, Restaurante* restaurantes);
+
+Lista<Restaurante*>* recomendar_restaurantes(Lista<Restaurante*>* restaurantes, Lista<string>* platos_deseados, unsigned precio_max)
+{
+    Lista<Restaurante>* restaurantes_recomendados = new Lista<Restaurante*>;
+	bool recomendado = false;
+	Nodo* actual = restaurantes -> obtener_actual()
+	
+	while ((restaurantes -> hay_siguiente()) && recomendado)
+	{
+		recomendado = esta(platos_deseados, actual); //si devuelve true -> tiene 2 o mas platos deseados
+		
+		if (recomendado && (actual -> obtener_precio_promedio()) <= precio_max)
+		{
+			restaurantes_recomendados -> insertar(actual);
+		}
+		
+		actual = restaurantes -> siguiente();
+	}
+	restaurantes -> reiniciar();
+		
+	return restaurantes_recomendados;
+}
+
+bool esta(Lista<string>* platos_deseados, Restaurante* restaurantes)
+{
+	bool esta = false;
+	int i = 1;
+	Lista<string>* lista_platos = restaurantes -> obtener_platos();
+  int ocurrencias = 0;
+	
+	for (int i = 1; (i <= (lista_platos -> obtener_tam()) && ocurrencias < 2); i++)
+	{
+		string plato = lista_platos -> obtener_dato(i);
+		for (int j = 1; (j <= (platos_deseados -> obtener_tam()) && !esta); j ++)
+		{
+			if (plato == (platos_deseados -> obtener_dato(j)))
+			{
+				esta = true;
+			}
+		}
+    ocurrencias ++;
+	}
+	
+	return esta;
+}
