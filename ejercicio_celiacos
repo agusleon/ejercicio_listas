@@ -1,0 +1,45 @@
+bool esta(Lista<string>* ingredientes, Alimento* comida);
+
+Lista<Alimento*>* comidas_para_celiacos(Lista<Alimento*>* comidas, Lista<string>* ingredientes_permitidos, Lista<string>* ingredientes_no_permitidos, unsigned caloria_max)
+{
+    Lista<Alimento>* celiacos = new Lista<Alimento*>;
+	bool permitido = false;
+	bool no_permitido = true;
+	
+	while ((comidas -> hay_siguiente()) && (!permitido || no_permitido))
+	{
+		permitido = esta(ingredientes_permitidos, actual); //si devuelve true -> tiene algun ingrediente permitido
+		no_permitido = esta(ingredientes_no_permitidos, actual); //si devuelve false -> no tiene ningun ingredientes no permitido
+		
+		if (permitido && !no permitido && (actual -> obtener_calorias()) <= caloria_max)
+		{
+			celiacos -> insertar(actual);
+		}
+		
+		actual = actual -> siguiente();
+	}
+	comidas -> reiniciar();
+		
+	return celiacos;
+}
+
+bool esta(Lista<string>* ingredientes, Alimento* comida)
+{
+	bool esta = false;
+	int i = 1;
+	Lista<string>* lista_ingredientes_comida = comida -> obtener_ingredientes();
+	
+	for (int i ) 1; (i <= (lista_ingredientes_comida -> obtener_tam()) && !esta); i++)
+	{
+		string ingrediente_comida = lista_ingredientes_comida -> obtener_dato(i);
+		for (int j = 1; (j <= (ingredientes -> obtener_tam()) && !esta); j ++)
+		{
+			if (ingrediente_comida == (ingredientes -> obtener_dato(j)))
+			{
+				esta = true;
+			}
+		}
+	}
+	
+	return esta;
+}
