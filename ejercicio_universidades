@@ -1,0 +1,44 @@
+bool esta(Lista<string>* ingredientes, Alimento* comida);
+
+Lista<Universidad*>* recomendar_universidades(Lista<Universidad*>* universidades, Lista<string>* vocaciones, unsigned ranking_min)
+{
+    Lista<Universidad>* universidades_recomendadas = new Lista<Universidad*>;
+	bool recomendada = false;
+	Nodo* actual = universidades -> obtener_actual()
+	
+	while ((universidades -> hay_siguiente()) && recomendada)
+	{
+		recomendada = esta(universidades_recomendadas, actual); //si devuelve true -> tiene alguna carrera de las universidades recomendadas
+		
+		if (recomendada && (actual -> obtener_ranking()) >= ranking_min)
+		{
+			universidades_recomendadas -> insertar(actual);
+		}
+		
+		actual = actual -> siguiente();
+	}
+	universidades -> reiniciar();
+		
+	return universidades_recomendadas;
+}
+
+bool esta(Lista<string>* vocaciones, Universidad* universidades)
+{
+	bool esta = false;
+	int i = 1;
+	Lista<string>* lista_vocaciones = universidades -> obtener_ingredientes();
+	
+	for (int i ) 1; (i <= (lista_vocaciones -> obtener_tam()) && !esta); i++)
+	{
+		string vocacion = lista_vocaciones -> obtener_dato(i);
+		for (int j = 1; (j <= (vocaciones -> obtener_tam()) && !esta); j ++)
+		{
+			if (vocacion == (vocaciones -> obtener_dato(j)))
+			{
+				esta = true;
+			}
+		}
+	}
+	
+	return esta;
+}
