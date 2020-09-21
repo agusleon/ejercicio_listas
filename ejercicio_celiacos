@@ -1,4 +1,4 @@
-bool esta(Lista<string>* ingredientes, Alimento* comida);
+bool esta(Lista<string>* ingredientes, Lista<string>* lista_ingredientes_comida);
 
 Lista<Alimento*>* comidas_para_celiacos(Lista<Alimento*>* comidas, Lista<string>* ingredientes_permitidos, Lista<string>* ingredientes_no_permitidos, unsigned caloria_max)
 {
@@ -8,38 +8,35 @@ Lista<Alimento*>* comidas_para_celiacos(Lista<Alimento*>* comidas, Lista<string>
 	
 	while ((comidas -> hay_siguiente()) && (!permitido || no_permitido))
 	{
-		permitido = esta(ingredientes_permitidos, actual); //si devuelve true -> tiene algun ingrediente permitido
-		no_permitido = esta(ingredientes_no_permitidos, actual); //si devuelve false -> no tiene ningun ingredientes no permitido
+		actual = comidas -> siguiente();
+		permitido = esta(ingredientes_permitidos, actual -> obtener_ingredientes()); //si devuelve true -> tiene algun ingrediente permitido
+		no_permitido = esta(ingredientes_no_permitidos, actual -> obtener_ingredientes()); //si devuelve false -> no tiene ningun ingredientes no permitido
 		
 		if (permitido && !no permitido && (actual -> obtener_calorias()) <= caloria_max)
 		{
-			celiacos -> insertar(actual);
+			celiacos -> insertar(actual, celiacos -> obtener_tam() + 1);
 		}
-		
-		actual = actual -> siguiente();
-	}
-	comidas -> reiniciar();
-		
+	}	
 	return celiacos;
 }
 
-bool esta(Lista<string>* ingredientes, Alimento* comida)
+bool esta(Lista<string>* ingredientes, Lista<string>* lista_ingredientes_comida)
 {
 	bool esta = false;
-	int i = 1;
-	Lista<string>* lista_ingredientes_comida = comida -> obtener_ingredientes();
-	
-	for (int i ) 1; (i <= (lista_ingredientes_comida -> obtener_tam()) && !esta); i++)
+	string actual;
+	ingredientes -> reiniciar()
+	lista_ingredientes_comida -> reiniciar()
+	while(!esta && lista_ingredientes_comida -> hay_siguiente())
 	{
-		string ingrediente_comida = lista_ingredientes_comida -> obtener_dato(i);
-		for (int j = 1; (j <= (ingredientes -> obtener_tam()) && !esta); j ++)
+		actual = lista_ingredientes_comida -> siguiente();
+		while (!esta && ingredientes -> hay_siguiente())
 		{
-			if (ingrediente_comida == (ingredientes -> obtener_dato(j)))
+			if (actual == (ingredientes -> siguiente()))
 			{
 				esta = true;
 			}
 		}
+		ingredientes -> reiniciar()
 	}
-	
 	return esta;
 }
