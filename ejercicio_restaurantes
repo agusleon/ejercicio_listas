@@ -1,4 +1,4 @@
-bool esta(Lista<string>* platos_deseados, Restaurante* restaurantes);
+bool esta(Lista<string>* platos_deseados, Lista<string>* lista_platos);
 
 Lista<Restaurante*>* recomendar_restaurantes(Lista<Restaurante*>* restaurantes, Lista<string>* platos_deseados, unsigned precio_max)
 {
@@ -22,25 +22,23 @@ Lista<Restaurante*>* recomendar_restaurantes(Lista<Restaurante*>* restaurantes, 
 	return restaurantes_recomendados;
 }
 
-bool esta(Lista<string>* platos_deseados, Restaurante* restaurantes)
+bool esta(Lista<string>* platos_deseados, Lista<string>* lista_platos)
 {
 	bool esta = false;
-	int i = 1;
-	Lista<string>* lista_platos = restaurantes -> obtener_platos();
-  int ocurrencias = 0;
-	
-	for (int i = 1; (i <= (lista_platos -> obtener_tam()) && ocurrencias < 2); i++)
+	string actual;
+	platos_deseados -> reiniciar()
+	lista_platos -> reiniciar()
+	while(!esta && lista_platos -> hay_siguiente())
 	{
-		string plato = lista_platos -> obtener_dato(i);
-		for (int j = 1; (j <= (platos_deseados -> obtener_tam()) && !esta); j ++)
+		actual = lista_platos -> siguiente();
+		while (!esta && platos_deseados -> hay_siguiente())
 		{
-			if (plato == (platos_deseados -> obtener_dato(j)))
+			if (actual == (platos_deseados -> siguiente()))
 			{
 				esta = true;
 			}
 		}
-    ocurrencias ++;
+		platos_deseados -> reiniciar()
 	}
-	
 	return esta;
 }
